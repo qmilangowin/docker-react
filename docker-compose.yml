@@ -1,0 +1,26 @@
+version: '3'
+services:
+  web:
+    build: 
+    #specify from where we should copy our files where we have our current files. In our case same dir as this file
+      context: .
+      dockerfile: Dockerfile.dev
+
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules 
+      - .:/app  #. being the current working directory
+    
+#service to run tests
+
+  tests:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    #over-ride starting command with npm run test
+    command: ["npm","run","test"]
+

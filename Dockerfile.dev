@@ -1,0 +1,12 @@
+FROM node:alpine
+
+WORKDIR  /app
+
+COPY package.json .
+
+RUN npm install
+
+#copy all the files from directory to docker container
+COPY . . 
+
+CMD ["npm","run","start"]
